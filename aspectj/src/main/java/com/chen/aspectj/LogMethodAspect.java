@@ -1,6 +1,6 @@
 package com.chen.aspectj;
 
-import android.util.Log;
+import com.chen.aspectj.utils.LogUtils;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -26,10 +26,10 @@ public class LogMethodAspect {
     }
 
     private Object logMethod(final ProceedingJoinPoint joinPoint) throws Throwable {
-        Log.d("czh",joinPoint.getSignature().toShortString() + " Args : " + (joinPoint.getArgs() != null ? Arrays.deepToString(joinPoint.getArgs()) : ""));
+        LogUtils.d(joinPoint.getSignature().toShortString() + " Args : " + (joinPoint.getArgs() != null ? Arrays.deepToString(joinPoint.getArgs()) : ""));
         Object result = joinPoint.proceed();
         String type = ((MethodSignature) joinPoint.getSignature()).getReturnType().toString();
-        Log.d("czh",joinPoint.getSignature().toShortString() + " Result : " + ("void".equalsIgnoreCase(type)?"void":result));
+        LogUtils.d(joinPoint.getSignature().toShortString() + " Result : " + ("void".equalsIgnoreCase(type) ? "void" : result));
         return result;
     }
 }
